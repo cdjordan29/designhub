@@ -1,0 +1,107 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task  
+		http://www.springframework.org/schema/task/spring-task.xsd">
+
+   
+   <task:executor id="myexecutor" pool-size="5"  />
+   <task:annotation-driven executor="myexecutor"/>
+
+   <mvc:annotation-driven />
+   
+   <bean id="communityBulletinDAO" class="com.hub.dao.CommunityBulletinDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="communityEventDAO" class="com.hub.dao.CommunityEventDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="groupDAO" class="com.hub.dao.GroupDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="messageDAO" class="com.hub.dao.MessageDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="podcastDAO" class="com.hub.dao.PodcastDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="radfordRecommendedCollaborationDAO" class="com.hub.dao.RadfordRecommendedCollaborationDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="radfordRecommendedReadingDAO" class="com.hub.dao.RadfordRecommendedReadingDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="reminderFrequencyDAO" class="com.hub.dao.ReminderFrequencyDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="studentRecommendedCollaborationDAO" class="com.hub.dao.StudentRecommendedCollaborationDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="studentRecommendedReadingDAO" class="com.hub.dao.StudentRecommendedReadingDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="techniqueCategoryDAO" class="com.hub.dao.TechniqueCategoryDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="techniqueDAO" class="com.hub.dao.TechniqueDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="techniqueSubCategoryDAO" class="com.hub.dao.TechniqueSubCategoryDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="userDAO" class="com.hub.dao.UserDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="userGroupDAO" class="com.hub.dao.UserGroupDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://gold-team.c4elqtvct92e.us-east-2.rds.amazonaws.com:3306/gold_team_DB" />
+		<property name="username" value="m_gold_team" />
+		<property name="password" value="goldteamrules" />
+	</bean>
+
+   <bean id="defaultViewResolver"
+   		class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name = "prefix" value = "/WEB-INF/jsp/" />
+      <property name = "suffix" value = ".jsp" />
+   </bean>
+   
+	<mvc:resources mapping="/resources/**" location="/resources/"
+	cache-period="31556926"/>
+	
+	<mvc:view-controller path="/login*" view-name="login" />
+	
+	<context:component-scan base-package = "com.hub" />
+	
+	
+	
+</beans>
